@@ -1,9 +1,13 @@
 
+   import java.io.BufferedReader;
+   import java.io.FileNotFoundException;
+   import java.io.FileReader;
+   import java.io.IOException;
    import java.util.List;
 import java.util.Scanner;
 
     public class Main {
-        public static void main(String[] args) {
+        public static void main(String[] args) throws IOException {
             Scanner scanner = new Scanner(System.in);
 
             DictionaryService service = null;
@@ -11,17 +15,31 @@ import java.util.Scanner;
             System.out.println("Выберите язык словаря:");
             System.out.println("1. Латинский (4 буквы)");
             System.out.println("2. Цифровой (5 цифр)");
-
+            BufferedReader reader;
             String choice = scanner.nextLine();
 
             if (choice.equals("1")) {
                 System.out.println("Введите путь 1 словаря");
                 String lang1 = scanner.nextLine();
+                reader  = new BufferedReader(new FileReader(lang1));
+                if(!reader.readLine().matches(".*\\d.*"))
                 service = new LatinDictionaryService(lang1);
+                else
+                {
+                    System.out.println("Неверный выбор.");
+                    return;
+                }
             } else if (choice.equals("2")) {
                 System.out.println("Введите путь 2 словаря");
                 String lang2 = scanner.nextLine();
+                reader  = new BufferedReader(new FileReader(lang2));
+                if(reader.readLine().matches(".*\\d.*"))
                 service = new DigitDictionaryService(lang2);
+                else
+                {
+                    System.out.println("Неверный выбор.");
+                    return;
+                }
             } else {
                 System.out.println("Неверный выбор.");
                 return;
