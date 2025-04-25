@@ -15,9 +15,13 @@ import java.util.Scanner;
             String choice = scanner.nextLine();
 
             if (choice.equals("1")) {
-                service = new LatinDictionaryService("dictionaries/lang1.txt");
+                System.out.println("Введите путь 1 словаря");
+                String lang1 = scanner.nextLine();
+                service = new LatinDictionaryService(lang1);
             } else if (choice.equals("2")) {
-                service = new DigitDictionaryService("dictionaries/lang2.txt");
+                System.out.println("Введите путь 2 словаря");
+                String lang2 = scanner.nextLine();
+                service = new DigitDictionaryService(lang2);
             } else {
                 System.out.println("Неверный выбор.");
                 return;
