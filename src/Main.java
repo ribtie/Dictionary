@@ -22,23 +22,13 @@ import java.util.Scanner;
                 System.out.println("Введите путь 1 словаря");
                 String lang1 = scanner.nextLine();
                 reader  = new BufferedReader(new FileReader(lang1));
-                if(!reader.readLine().matches(".*\\d.*"))
                 service = new LatinDictionaryService(lang1);
-                else
-                {
-                    System.out.println("Неверный выбор.");
-                    return;
-                }
+
             } else if (choice.equals("2")) {
                 System.out.println("Введите путь 2 словаря");
                 String lang2 = scanner.nextLine();
                 reader  = new BufferedReader(new FileReader(lang2));
-                if(reader.readLine().matches(".*\\d.*"))
                 service = new DigitDictionaryService(lang2);
-                else
-                {
-                    service = new DigitDictionaryService("");
-                }
             } else {
                 System.out.println("Неверный выбор.");
                 return;
