@@ -3,12 +3,19 @@ import java.io.*;
 
 public abstract class DictionaryService {
     protected String filepath;
+    protected boolean valid = true;
 
     public DictionaryService(String filepath) {
         this.filepath = filepath;
     }
 
+
+    public boolean isValid() {
+        return valid;
+    }
+
     public List<DictionaryEntry> readAll() {
+        if (!valid) return new ArrayList<>();
         List<DictionaryEntry> list = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
             String line;
@@ -25,6 +32,7 @@ public abstract class DictionaryService {
     }
 
     public DictionaryEntry findByKey(String key) {
+        if (!valid) return null;
         for (DictionaryEntry e : readAll()) {
             if (e.key.equals(key)) return e;
         }
@@ -32,6 +40,7 @@ public abstract class DictionaryService {
     }
 
     public boolean deleteEntry(String key) {
+        if (!valid) return false;
         List<DictionaryEntry> entries = readAll();
         boolean removed = entries.removeIf(e -> e.key.equals(key));
         if (!removed) return false;

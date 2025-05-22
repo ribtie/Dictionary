@@ -37,8 +37,7 @@ import java.util.Scanner;
                 service = new DigitDictionaryService(lang2);
                 else
                 {
-                    System.out.println("Неверный выбор.");
-                    return;
+                    service = new DigitDictionaryService("");
                 }
             } else {
                 System.out.println("Неверный выбор.");
